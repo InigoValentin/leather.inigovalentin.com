@@ -1,0 +1,48 @@
+@if (project){
+  <div id='details'>
+    @if (project.images.length > 0){
+      <img
+        (click)=galleryOpen(0); id='img-0' class='img img_main'
+        src='{{ this.apiURL }}{{ project.images[0].path }}' alt='{{ project.images[0].title }}'
+        attr.data-description='{{ project.images[0].description }}'
+      />
+    }
+      <h2 id='project_title'>{{ project.title }}</h2>
+      <p [innerHTML]='project.description'></p>
+  </div>
+  <div id='images'>
+    @for (image of project.images; track image.id) {
+       <img
+         (click)='galleryOpen(image.id)' id='img-{{ image.id }}' class='img'
+         src='{{ this.apiURL }}{{ image.path }}' alt='{{ image.title }}'
+         attr.data-description='{{ image.description }}'
+       />
+    }
+  </div>
+  <div id='gallery-cover' onClick='galleryClose();'></div>
+    <div id='gallery'>
+      <h3>
+        <span>{{ project.title }}</span>
+        <span id='gallery-title'></span>
+        <input
+          type='button' id='gallery-next' class='gallery-control'
+          (click)='galleryClose();' value='X'
+        />
+      </h3>
+      <div id='gallery-flex'>
+        <div id='gallery-flex-img-container'>
+          <img id='gallery-img'/>
+          <video controls autoplay id='gallery-video'></video>
+        </div>
+        <p id='gallery-text'></p>
+      </div>
+      <div id='gallery-controls'>
+        <input
+          type='button' id='gallery-prev' class='gallery-control' (click)='galleryPrev();' value='<'
+        />
+        <input
+          type='button' id='gallery-next' class='gallery-control' (click)='galleryNext();' value='>'
+        />
+      </div>
+    </div>
+  }

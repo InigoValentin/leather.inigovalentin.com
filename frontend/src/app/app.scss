@@ -1,0 +1,31 @@
+@use '_variables';
+
+body{
+  background-color: variables.$background-off-white;
+  color: variables.$primary-brown;
+  font-family: serif;
+  margin: 0;
+  white-space-collapse: collapse;
+}
+
+h1, h2, h3 {
+  color: variables.$primary-brown;
+}
+
+a {
+  color: variables.$accent-gold;
+  text-decoration: none;
+}
+
+input[type='button'] {
+  background-color: variables.$primary-brown;
+  color: variables.$background-off-white;
+  border: 0.15em solid variables.$darker-brown;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 0.2em;
+}
+
+input[type='button']:hover {
+  background-color: variables.$darker-brown;
+}

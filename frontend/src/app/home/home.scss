@@ -1,0 +1,99 @@
+@use '../_variables';
+
+section#catalog{
+    text-align: center;
+    font-size: 0;
+    
+    article{
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        width: calc(33% - 1.2em);
+        max-width: 18em;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        border: 0.1em solid variables.$primary-brown;
+        border-radius: 0.3em;
+        margin: 0.5em;
+        font-size: initial;
+        
+        img.project-image{
+            object-fit: cover;
+            object-position: center;
+            width: 100%;
+            height: 100%;
+            scale: 1;
+            transition: scale 0.5s ease-in-out, opacity 1s ease-in-out;
+            position: absolute;
+            left: 0;
+            transition: opacity 0.5s ease-in-out, scale 0.5s ease-in-out;
+        }
+        
+        img.project-image-alt{
+            object-fit: cover;
+            object-position: center;
+            width: 100%;
+            height: 100%;
+            scale: 1;
+            transition: scale 0.5s ease-in-out, opacity 1s ease-in-out;
+            position: absolute;
+            left: 0;
+            transition: opacity 0.5s ease-in-out, scale 0.5s ease-in-out;
+            background-color: red;
+        }
+        
+        div.project_details{
+            position: absolute;
+            bottom: 0em;
+            width: 100%;
+            height: 100%;
+            text-align: right;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+            background: #000000;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 12%, rgba(0, 0, 0, 0) 37%, rgba(0, 0, 0, 0) 100%);
+            transition: opacity 0.5s ease-in-out;
+        
+            h3{
+                margin: 0.3em;
+                width: calc(100% - 0.6em);
+                position: absolute;
+                bottom: 0em;
+                color: var(--accent-gold);
+                font-size: 150%;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width : 600px) {
+    section#catalog article{
+        width: calc(33% - 0.12em);
+        margin: 0;
+        border-radius: 0;
+        
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+@media (hover: hover) {
+    section#catalog article:hover img{
+        scale: 1.2;
+    }
+    section#catalog article:hover div.project_details{
+        opacity: 0.8;
+    }
+}
+
+@media (hover: none) {
+    section#catalog article div.project_details{
+        opacity: 0.8;
+    }
+}
+
+
+

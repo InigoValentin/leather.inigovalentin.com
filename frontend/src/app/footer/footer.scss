@@ -1,0 +1,8 @@
+@use '../variables';
+
+footer{
+    margin: 2em 0 0 0;
+    border-top: 0.2em solid variables.$darker-brown;
+    background-color: variables.$primary-brown;
+    color: variables.$background-off-white;
+}

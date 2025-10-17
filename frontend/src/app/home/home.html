@@ -1,0 +1,16 @@
+<section id='catalog'>
+  @for (project of projects; track project) {
+    <article class="project">
+      <a href="/projects/{{ project.permalink }}" class='project'>
+        <img class="project-image-alt" id="img-project-{{project.id}}-alt"/>
+        <img
+          class="project-image" id="img-project-{{project.id}}"
+          src="{{ apiURL }}{{ project.images[0].path }}"
+        />
+        <div class='project_details'>
+          <h3>{{ project.title }}</h3>
+        </div>
+      </a>
+    </article>
+  }
+</section>
