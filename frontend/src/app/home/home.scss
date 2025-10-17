@@ -17,7 +17,7 @@ section#catalog{
         margin: 0.5em;
         font-size: initial;
         
-        img.project-image{
+        img.project-image, img.project-image-alt{
             object-fit: cover;
             object-position: center;
             width: 100%;
@@ -28,20 +28,7 @@ section#catalog{
             left: 0;
             transition: opacity 0.5s ease-in-out, scale 0.5s ease-in-out;
         }
-        
-        img.project-image-alt{
-            object-fit: cover;
-            object-position: center;
-            width: 100%;
-            height: 100%;
-            scale: 1;
-            transition: scale 0.5s ease-in-out, opacity 1s ease-in-out;
-            position: absolute;
-            left: 0;
-            transition: opacity 0.5s ease-in-out, scale 0.5s ease-in-out;
-            background-color: red;
-        }
-        
+
         div.project_details{
             position: absolute;
             bottom: 0em;
@@ -81,18 +68,12 @@ section#catalog{
 }
 
 @media (hover: hover) {
-    section#catalog article:hover img{
-        scale: 1.2;
-    }
-    section#catalog article:hover div.project_details{
-        opacity: 0.8;
-    }
+    section#catalog article:hover img{scale: 1.2;}
+    section#catalog article:hover div.project_details{opacity: 0.8;}
 }
 
 @media (hover: none) {
-    section#catalog article div.project_details{
-        opacity: 0.8;
-    }
+    section#catalog article div.project_details{opacity: 0.8;}
 }
 
 

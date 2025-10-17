@@ -23,4 +23,5 @@ export class ProjectService {
   getProjectRandomImage(id: string): Observable<ProjectImageModel> {
     return this.http.get<ProjectImageModel>(`${this.apiUrl}/${id}/images/random`);
   }
+  
 }

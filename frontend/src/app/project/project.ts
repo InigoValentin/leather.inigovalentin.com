@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../service/project-service';
+import { UtilService } from '../service/util-service';
 import { ProjectModel } from '../model/project';
 import { environment } from '../../environments/environment';
 
@@ -11,6 +12,7 @@ export class Project {
     
     project: ProjectModel | undefined;
     apiURL: string = environment.apiUrl;
+    utilService: UtilService;
     
     /**
      * Index of the photo currently on the gallery.
@@ -22,15 +24,17 @@ export class Project {
      */
     private maxIndex: number = -1;
 
-    constructor(private route: ActivatedRoute, private projectService: ProjectService) { }
+    constructor(private route: ActivatedRoute, private projectService: ProjectService){
+        this.utilService = new UtilService();
+    }
     
     ngOnInit(): void {
-      const id = this.route.snapshot.paramMap.get('id');
-      // Use the id to fetch data or perform actions
-      this.projectService.getProject("" + id).subscribe(data => {
-        this.project = data;
-        this.maxIndex = this.project.images.length; 
-      });
+        const id = this.route.snapshot.paramMap.get('id');
+        // Use the id to fetch data or perform actions
+        this.projectService.getProject("" + id).subscribe(data => {
+            this.project = data;
+            this.maxIndex = this.project.images.length; 
+        });
     }
 
     /**
@@ -39,19 +43,12 @@ export class Project {
      * @param index Index of the photo to display
      */
     galleryOpen(index: any){
-        console.log("GALLERY OPEN" + index);
         let cover: HTMLDivElement = <HTMLDivElement> document.getElementById('gallery-cover');
         let gallery: HTMLDivElement = <HTMLDivElement> document.getElementById('gallery');
         cover.style.display = 'block';
         cover.style.opacity = '0.4';
         gallery.style.display = 'block';
         gallery.style.opacity = '1';
-        // Check index:
-        let i = 0;
-        while (document.getElementById('img-' + i) != null){
-            this.maxIndex = i;
-            i ++
-        }
         if (index >= 0 && index <= this.maxIndex){
             this.curIndex = index;
             this.gallerySet();
@@ -100,6 +97,8 @@ export class Project {
             video.style.display = 'none';
             image.style.display = 'block';
             image.src = document.getElementById('img-' + this.curIndex)?.getAttribute("src") || "";
+            image.srcset
+              = document.getElementById('img-' + this.curIndex)?.getAttribute("srcset") || "";
         }
         let description: string
           = document.getElementById('img-' + this.curIndex)?.dataset["description"] || "";

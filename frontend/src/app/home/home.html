@@ -6,6 +6,7 @@
         <img
           class="project-image" id="img-project-{{project.id}}"
           src="{{ apiURL }}{{ project.images[0].path }}"
+          srcset="{{ utilService.generateSrcset(apiURL + project.images[0].path) }}"
         />
         <div class='project_details'>
           <h3>{{ project.title }}</h3>

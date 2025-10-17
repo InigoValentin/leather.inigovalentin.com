@@ -1,11 +1,13 @@
 # Database
-data.sqlite3
+data.sqlite3*
+data.sql
 
 # Environment files
 environment/env.*
 
 # Assets
 assets/images/projects/
+assets/images_scaled/
 
 # Node.js
 node_modules/

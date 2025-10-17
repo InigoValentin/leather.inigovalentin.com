@@ -7,6 +7,7 @@ main{
 
 div#details{
     min-height: 24em;
+    margin: auto 4em 0 4em;
    
     p{margin: auto 0.2em;}
 }
@@ -35,6 +36,7 @@ img.video_play{
     height: 3em;
     margin: 0 4.5em 0 -8em;
     z-index: 1;
+    position: relative;
 }
 
 video.img::-webkit-media-controls{display: none;}
@@ -66,6 +68,7 @@ div#gallery-cover{
     background-color: variables.$darker-brown;
     opacity: 0.4;
     transition: opacity 1s ease-in-out;
+    z-index: 2;
 }
 
 div#gallery{
@@ -80,6 +83,7 @@ div#gallery{
     border-radius: 0.4em;
     transition: opacity 1s ease-in-out;
     text-align: center;
+    z-index: 3;
 
     h3{
         text-align: left;
@@ -143,24 +147,29 @@ div#gallery{
         bottom: 2%;
         left: 2%;
         right: 2%;
-    }
+        
+        div#gallery-flex{
+            display: block;
+        }
+    
+        img#gallery-img{
+            display: block;
+            max-height: calc(60% - 2em);
+            max-width: 95%;
+            margin: 0.2em auto;
+        }
+    
+        p#gallery-text{
+            display: block;
+            max-width: 100%;
+            margin: auto 0.3em;
+            max-height: calc(40% - 2em);
+        }
 
-    div#gallery img#gallery-img{
-        display: block;
-        max-height: calc(60% - 2em);
-        max-width: 95%;
-        margin: 0.2em auto;
-    }
-    div#gallery p#gallery-text{
-        display: block;
-        max-width: 100%;
-        margin: auto 0.3em;
-        max-height: calc(40% - 2em);
-    }
-
-    div#gallery div#gallery-controls{
-        position: absolute;
-        bottom: 0;
-        width: 100%;
+        div#gallery-controls{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
     }
 }
