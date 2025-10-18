@@ -1,15 +1,19 @@
 <footer>
-  <table id='footer_table'>
-    <tr>
-      <td id='footer_left'>
-        Version {{ version }} Developed by <a href='{{ authorURL }}'>{{ author }}</a>.
-        <br/><br/>
-        Source code available on <a href='{{ sourceURL }}'>{{ sourceSite }}</a>
-        under the {{ license }}.
-      </td>
-      <td id='footer_right'>
-      </td>
-    </tr>
-  </table>
+  <div id='footer-left'>
+    <span innerHTML="{{ 'FOOTER.DEVELOPED' | translate:{version, authorURL, author} }}"></span>
+    <span innerHTML="{{ 'FOOTER.SOURCE' | translate:{sourceURL, sourceSite, license} }}"></span>
+  </div>
+  <div id='footer-right'>
+    <div class="language-switcher">
+      @for (language of languages; track language){
+        <img
+          class="lang"
+          [class.active]="language.code === currentLanguage"
+          (click)="switchLanguage(language.code)"
+          alt="{{ language.name }}" src="/img/lang/{{language.code}}.svg"
+        >
+      }
+    </div>
+  </div>
 </footer>
 

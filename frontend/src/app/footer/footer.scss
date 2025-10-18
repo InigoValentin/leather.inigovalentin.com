@@ -2,7 +2,37 @@
 
 footer{
     margin: 2em 0 0 0;
+    text-align: center;
+    padding: 0;
     border-top: 0.2em solid variables.$darker-brown;
     background-color: variables.$primary-brown;
     color: variables.$background-off-white;
+    
+    div#footer-left, div#footer-right{
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        width: 44%;
+        margin: 0;
+        padding: 0.5em 2em;
+        span{display: block;}
+    }
+    
+    div#footer-left span{
+        font-size: 70%;
+        margin: 0.3em auto;
+    }
+    
+    div#footer-right img.lang{
+        max-width: 1.5em;
+        margin: auto 0.3em;
+        border: 0.2em solid variables.$darker-brown;
+        border-radius: 0.4em;
+        cursor: pointer;
+        box-shadow: 0 0 0.1em #fff;
+    }
+    
+    div#footer-right img.lang.active{
+        border: 0.2em solid variables.$accent-gold;
+    }
 }

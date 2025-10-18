@@ -12,16 +12,19 @@ export class ProjectService {
   constructor(private http: HttpClient) { }
 
   getProjects(): Observable<ProjectModel[]> {
-    console.log("GETTING ALL PROJECTS: " + this.apiUrl);
-    return this.http.get<ProjectModel[]>(this.apiUrl);
+    return this.http.get<ProjectModel[]>(this.apiUrl + "?lang=" + localStorage.getItem('language'));
   }
 
   getProject(id: string): Observable<ProjectModel> {
-    return this.http.get<ProjectModel>(`${this.apiUrl}/${id}`);
+    return this.http.get<ProjectModel>(
+      `${this.apiUrl}/${id}` + "?lang=" + localStorage.getItem('language')
+    );
   }
   
   getProjectRandomImage(id: string): Observable<ProjectImageModel> {
-    return this.http.get<ProjectImageModel>(`${this.apiUrl}/${id}/images/random`);
+    return this.http.get<ProjectImageModel>(
+      `${this.apiUrl}/${id}/images/random` + "?lang=" + localStorage.getItem('language')
+    );
   }
   
 }

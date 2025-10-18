@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { ProjectService } from '../service/project-service';
+import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../service/util-service';
 import { ProjectModel } from '../model/project';
 import { environment } from '../../environments/environment';
@@ -14,6 +16,8 @@ export class Project {
     apiURL: string = environment.apiUrl;
     utilService: UtilService;
     
+    private translate = inject(TranslateService)
+    
     /**
      * Index of the photo currently on the gallery.
      */
@@ -24,7 +28,10 @@ export class Project {
      */
     private maxIndex: number = -1;
 
-    constructor(private route: ActivatedRoute, private projectService: ProjectService){
+    constructor(
+      private route: ActivatedRoute, private projectService:
+      ProjectService, private titleService: Title
+    ){
         this.utilService = new UtilService();
     }
     
@@ -33,7 +40,10 @@ export class Project {
         // Use the id to fetch data or perform actions
         this.projectService.getProject("" + id).subscribe(data => {
             this.project = data;
-            this.maxIndex = this.project.images.length; 
+            this.maxIndex = this.project.images.length;
+            this.titleService.setTitle(
+              this.project.title + " - " + this.translate.instant('SITE.TITLE')
+            );
         });
     }
 

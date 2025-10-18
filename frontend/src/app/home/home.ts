@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { TranslateService, _ } from '@ngx-translate/core';
 import { ProjectService } from '../service/project-service';
 import { UtilService } from '../service/util-service';
 import { ProjectModel } from '../model/project';
@@ -10,14 +12,23 @@ export class Home implements OnInit {
     private intervalId: any;
     apiURL: string = environment.apiUrl;
     utilService: UtilService;
+    
+    private translate = inject(TranslateService)
 
-    constructor(private projectService: ProjectService){
+    constructor(private projectService: ProjectService, private titleService: Title){
         this.utilService = new UtilService()
+        this.translate.use("" + localStorage.getItem("language"));
     }
 
     ngOnInit(): void {
         this.projectService.getProjects().subscribe(data => { this.projects = data; });
-        this.startInterval()
+        this.startInterval();
+        this.translate.use("" + localStorage.getItem("language"));
+        //this.translate.use
+        console.log("GETTING TITLE IN " + this.translate.getCurrentLang()  + " OF " + localStorage.getItem("language"));
+        this.translate.get(_('SITE.TITLE')).subscribe((res: string) => {
+            this.titleService.setTitle(res)
+        });
     }
   
     private delay(ms: number){ return new Promise(resolve => setTimeout(resolve, ms)); }

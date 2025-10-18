@@ -8,6 +8,12 @@ main{
 div#details{
     min-height: 24em;
     margin: auto 4em 0 4em;
+    
+    h2{
+        font-size: 300%;
+        border-bottom: 0.2em solid;
+        margin-left: 2em;
+    }
    
     p{margin: auto 0.2em;}
 }
