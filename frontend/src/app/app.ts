@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {  } from '@angular/core';
 import { TranslateService, TranslatePipe, TranslateDirective } from '@ngx-translate/core';
 import { Header } from './header/header';
 import { Footer } from './footer/footer';

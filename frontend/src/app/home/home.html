@@ -1,3 +1,13 @@
+<section id='profile'>
+  <img
+    src="{{ apiURL }}{{ profile.image }}"
+    srcset="{{ utilService.generateSrcset(apiURL + profile.image) }}"
+  />
+  <div id="profile-text">
+    <p>{{ profile.bio }}</p>
+    <p>{{ profile.description }}</p>
+  </div>
+</section>
 <section id='catalog'>
   @for (project of projects; track project) {
     <article class="project">

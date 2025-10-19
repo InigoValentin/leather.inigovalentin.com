@@ -7,6 +7,7 @@ environment/env.*
 
 # Assets
 assets/images/projects/
+assets/images/profile/
 assets/images_scaled/
 
 # Node.js

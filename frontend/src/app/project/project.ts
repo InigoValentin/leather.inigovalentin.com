@@ -56,7 +56,7 @@ export class Project {
         let cover: HTMLDivElement = <HTMLDivElement> document.getElementById('gallery-cover');
         let gallery: HTMLDivElement = <HTMLDivElement> document.getElementById('gallery');
         cover.style.display = 'block';
-        cover.style.opacity = '0.4';
+        cover.style.opacity = '0.6';
         gallery.style.display = 'block';
         gallery.style.opacity = '1';
         if (index >= 0 && index <= this.maxIndex){
@@ -86,7 +86,8 @@ export class Project {
      */
     gallerySet(){
         let titleText = document.getElementById('img-' + this.curIndex)?.getAttribute("alt") || "";
-        if (titleText != null && titleText.length > 0) titleText = ': ' + titleText;
+        if (titleText != null && titleText.length > 0 && titleText != "" + this.project?.title)
+            titleText = ': ' + titleText;
         else titleText = '';
         let title: HTMLSpanElement = <HTMLSpanElement> document.getElementById('gallery-title');
         let text: HTMLParagraphElement

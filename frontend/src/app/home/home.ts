@@ -2,26 +2,33 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { TranslateService, _ } from '@ngx-translate/core';
 import { ProjectService } from '../service/project-service';
+import { ProfileService } from '../service/profile-service';
 import { UtilService } from '../service/util-service';
 import { ProjectModel } from '../model/project';
+import { ProfileModel } from '../model/profile';
 import { environment } from '../../environments/environment';
 
 @Component({ selector: 'app-home', templateUrl: './home.html', styleUrl: './home.scss'})
 export class Home implements OnInit {
     projects: ProjectModel[] = [];
+    profile: any;
     private intervalId: any;
     apiURL: string = environment.apiUrl;
     utilService: UtilService;
     
     private translate = inject(TranslateService)
 
-    constructor(private projectService: ProjectService, private titleService: Title){
+    constructor(
+      private projectService: ProjectService, private profileService: ProfileService,
+      private titleService: Title
+    ){
         this.utilService = new UtilService()
         this.translate.use("" + localStorage.getItem("language"));
     }
 
     ngOnInit(): void {
         this.projectService.getProjects().subscribe(data => { this.projects = data; });
+        this.profileService.getProfile().subscribe(data => { this.profile = data; });
         this.startInterval();
         this.translate.use("" + localStorage.getItem("language"));
         //this.translate.use

@@ -1,8 +1,14 @@
 header{
     text-align: center;
+    
+    h1{
+        margin: 0.2em;
 
-    img{
-        max-height: 7em;
-        max-width: 90%;
+        img{
+            max-height: 7em;
+            max-width: 90%;
+            
+            @media screen and (max-width: 800px){max-height: 5.6em;}
+        }
     }
 }
