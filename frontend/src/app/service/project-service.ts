@@ -11,8 +11,13 @@ export class ProjectService {
   private apiUrl = environment.apiUrl + '/projects';
   constructor(private http: HttpClient) { }
 
-  getProjects(): Observable<ProjectModel[]> {
-    return this.http.get<ProjectModel[]>(this.apiUrl + "?lang=" + localStorage.getItem('language'));
+  getProjects(images: any): Observable<ProjectModel[]> {
+    var paramImages: string = "";
+    if (images == true || parseInt(images) >= 0)
+        paramImages = "&images=" + images;
+    return this.http.get<ProjectModel[]>(
+      this.apiUrl + "?lang=" + localStorage.getItem('language') + paramImages
+    );
   }
 
   getProject(id: string): Observable<ProjectModel> {

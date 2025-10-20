@@ -2,7 +2,7 @@
   <div id='details'>
     @if (project.images.length > 0){
       <img
-        (click)=galleryOpen(0); id='img-0' class='img img_main'
+        (click)=galleryOpen(1); id='img-1' class='img img_main'
         src='{{ this.apiURL }}{{ project.images[0].path }}' alt='{{ project.images[0].title }}'
         srcset="{{ utilService.generateSrcset(apiURL + project.images[0].path) }}"
         attr.data-description='{{ project.images[0].description }}'
@@ -13,30 +13,35 @@
   </div>
   <div id='images'>
     @for (image of project.images; track image.id) {
-      @if (image.video == 0){
-        <img
-          (click)='galleryOpen(image.id)' id='img-{{ image.id }}' class='img'
-          src='{{ this.apiURL }}{{ image.path }}' alt='{{ image.title }}'
-          srcset="{{ utilService.generateSrcset(apiURL + image.path) }}"
-          attr.data-description='{{ image.description }}'
-          data-video='false'
-        />
-      }
-      @else{
-        <video
-          muted (click)='galleryOpen(image.id)' class='img img_vid' id='img-{{ image.id }}'
-          src='{{ this.apiURL }}{{ image.path }}'
-          data-video='true' attr.data-description='{{ image.description }}'
-        >
-        </video>
-        <img (click)='galleryOpen(image.id)' class='video_play'
-          src='/img/icon/video.png' alt='{{ image.title }}'
-        />
+      @if (image.id > 1){
+        @if (image.video == 0){
+          <img
+            (click)='galleryOpen(image.id)' id='img-{{ image.id }}' class='img'
+            src='{{ this.apiURL }}{{ image.path }}' alt='{{ image.title }}'
+            srcset="{{ utilService.generateSrcset(apiURL + image.path) }}"
+            attr.data-description='{{ image.description }}' data-video='false'
+          />
+        }
+        @else{
+          <video
+            muted (click)='galleryOpen(image.id)' class='img img_vid' id='img-{{ image.id }}'
+            src='{{ this.apiURL }}{{ image.path }}' playsinline
+            data-video='true' attr.data-description='{{ image.description }}'
+          >
+          </video>
+          <img (click)='galleryOpen(image.id)' class='video_play' type="video/mp4"
+            src='/img/icon/video.png' alt='{{ image.title }}'
+          />
+        }
       }
     }
   </div>
   <div id='gallery-cover' onClick='galleryClose();'></div>
-    <div id='gallery'>
+    <div
+      id='gallery'
+      (touchstart)="gallerySwipe($event, 'start')" (touchend)="gallerySwipe($event, 'end')"
+    >
+      <div id='gallery-fade'></div>
       <h3>
         <span>{{ project.title }}</span>
         <span id='gallery-title'></span>
@@ -45,20 +50,22 @@
           (click)='galleryClose();' value='X'
         />
       </h3>
-      <div id='gallery-flex'>
-        <div id='gallery-flex-img-container'>
-          <img id='gallery-img'/>
-          <video controls autoplay id='gallery-video'></video>
+      <div id='gallery-content'>
+        <div id='gallery-flex'>
+          <div id='gallery-flex-img-container'>
+            <img id='gallery-img'/>
+            <video controls autoplay playsinline type="video/mp4" id='gallery-video'></video>
+          </div>
+          <p id='gallery-text'></p>
         </div>
-        <p id='gallery-text'></p>
-      </div>
-      <div id='gallery-controls'>
-        <input
-          type='button' id='gallery-prev' class='gallery-control' (click)='galleryPrev();' value='<'
-        />
-        <input
-          type='button' id='gallery-next' class='gallery-control' (click)='galleryNext();' value='>'
-        />
+        <div id='gallery-controls'>
+          <input
+            type='button' id='gallery-prev' class='gallery-control' (click)='galleryPrev();' value='<'
+          />
+          <input
+            type='button' id='gallery-next' class='gallery-control' (click)='galleryNext();' value='>'
+          />
+        </div>
       </div>
     </div>
   }

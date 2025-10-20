@@ -27,12 +27,11 @@ export class Home implements OnInit {
     }
 
     ngOnInit(): void {
-        this.projectService.getProjects().subscribe(data => { this.projects = data; });
+        this.projectService.getProjects(1).subscribe(data => { this.projects = data; });
         this.profileService.getProfile().subscribe(data => { this.profile = data; });
         this.startInterval();
         this.translate.use("" + localStorage.getItem("language"));
         //this.translate.use
-        console.log("GETTING TITLE IN " + this.translate.getCurrentLang()  + " OF " + localStorage.getItem("language"));
         this.translate.get(_('SITE.TITLE')).subscribe((res: string) => {
             this.titleService.setTitle(res)
         });
