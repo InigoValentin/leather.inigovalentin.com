@@ -1,0 +1,10 @@
+{
+  "SITE": {
+    "TITLE": "Iñigo Valentin: Trabajos en cuero",
+    "DESCRIPTION": "This is a multi-language Angular application."
+  },
+  "FOOTER": {
+    "DEVELOPED": "Versión {{ version }}. Desarrollado por <a href='{{ authorURL }}'>{{ author }}</a>",
+    "SOURCE": "Código fuende disponible en <a href='{{ sourceURL }}'>{{ sourceSite }}</a> bajo licencia {{ license }}"
+  }
+}

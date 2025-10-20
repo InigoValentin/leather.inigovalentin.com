@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { ProjectService } from '../service/project-service';
+import { TranslateService } from '@ngx-translate/core';
+import { UtilService } from '../service/util-service';
 import { ProjectModel } from '../model/project';
 import { environment } from '../../environments/environment';
 
@@ -11,6 +14,9 @@ export class Project {
     
     project: ProjectModel | undefined;
     apiURL: string = environment.apiUrl;
+    utilService: UtilService;
+    
+    private translate = inject(TranslateService)
     
     /**
      * Index of the photo currently on the gallery.
@@ -22,15 +28,23 @@ export class Project {
      */
     private maxIndex: number = -1;
 
-    constructor(private route: ActivatedRoute, private projectService: ProjectService) { }
+    constructor(
+      private route: ActivatedRoute, private projectService:
+      ProjectService, private titleService: Title
+    ){
+        this.utilService = new UtilService();
+    }
     
     ngOnInit(): void {
-      const id = this.route.snapshot.paramMap.get('id');
-      // Use the id to fetch data or perform actions
-      this.projectService.getProject("" + id).subscribe(data => {
-        this.project = data;
-        this.maxIndex = this.project.images.length; 
-      });
+        const id = this.route.snapshot.paramMap.get('id');
+        // Use the id to fetch data or perform actions
+        this.projectService.getProject("" + id).subscribe(data => {
+            this.project = data;
+            this.maxIndex = this.project.images.length;
+            this.titleService.setTitle(
+              this.project.title + " - " + this.translate.instant('SITE.TITLE')
+            );
+        });
     }
 
     /**
@@ -39,19 +53,12 @@ export class Project {
      * @param index Index of the photo to display
      */
     galleryOpen(index: any){
-        console.log("GALLERY OPEN" + index);
         let cover: HTMLDivElement = <HTMLDivElement> document.getElementById('gallery-cover');
         let gallery: HTMLDivElement = <HTMLDivElement> document.getElementById('gallery');
         cover.style.display = 'block';
-        cover.style.opacity = '0.4';
+        cover.style.opacity = '0.6';
         gallery.style.display = 'block';
         gallery.style.opacity = '1';
-        // Check index:
-        let i = 0;
-        while (document.getElementById('img-' + i) != null){
-            this.maxIndex = i;
-            i ++
-        }
         if (index >= 0 && index <= this.maxIndex){
             this.curIndex = index;
             this.gallerySet();
@@ -74,12 +81,19 @@ export class Project {
         video.currentTime = 0;
     }
     
+    private delay(ms: number){ return new Promise(resolve => setTimeout(resolve, ms)); }
+    
     /**
      * Pupulates the data in the gallery.
      */
-    gallerySet(){
+    async gallerySet(){
+        var fade = <HTMLDivElement> document.getElementById('gallery-fade');
+        fade.style.display = 'block';
+        fade.style.opacity = '1';
+        await this.delay(200);
         let titleText = document.getElementById('img-' + this.curIndex)?.getAttribute("alt") || "";
-        if (titleText != null && titleText.length > 0) titleText = ': ' + titleText;
+        if (titleText != null && titleText.length > 0 && titleText != "" + this.project?.title)
+            titleText = ': ' + titleText;
         else titleText = '';
         let title: HTMLSpanElement = <HTMLSpanElement> document.getElementById('gallery-title');
         let text: HTMLParagraphElement
@@ -100,12 +114,17 @@ export class Project {
             video.style.display = 'none';
             image.style.display = 'block';
             image.src = document.getElementById('img-' + this.curIndex)?.getAttribute("src") || "";
+            image.srcset
+              = document.getElementById('img-' + this.curIndex)?.getAttribute("srcset") || "";
         }
         let description: string
           = document.getElementById('img-' + this.curIndex)?.dataset["description"] || "";
         text.innerHTML = description;
         if (description.length > 0) text.style.display = 'block';
         else text.style.display = 'none';
+        fade.style.opacity = '0';
+        await this.delay(200);
+        fade.style.display = 'none';
     }
 
     /**
@@ -113,7 +132,7 @@ export class Project {
      */
     galleryNext(){
         this.curIndex ++;
-        if (this.curIndex > this.maxIndex) this.curIndex = 0;
+        if (this.curIndex >= this.maxIndex) this.curIndex = 1;
         this.gallerySet();
     }
 
@@ -122,8 +141,32 @@ export class Project {
      */
     galleryPrev(){
         this.curIndex --;
-        if (this.curIndex < 0) this.curIndex = this.maxIndex;
+        if (this.curIndex < 1) this.curIndex = this.maxIndex;
         this.gallerySet();
+    }
+    
+    private swipeCoord?: [number, number];
+    private swipeTime?: number;
+    
+    gallerySwipe(e: TouchEvent, when: string): void {
+        console.log("SWIPE");
+        const coord: [number, number] = [e.changedTouches[0].pageX, e.changedTouches[0].pageY];
+        const time = new Date().getTime();
+        if (when === 'start') {
+            this.swipeCoord = coord;
+            this.swipeTime = time;
+        }
+        else if (this.swipeCoord && this.swipeTime && when === 'end') {
+            const direction = [coord[0] - this.swipeCoord[0], coord[1] - this.swipeCoord[1]];
+            const duration = time - this.swipeTime;
+            if (
+              duration < 1000
+              && Math.abs(direction[0]) > 30 && Math.abs(direction[0]) > Math.abs(direction[1] * 3)
+            ){ 
+                if (direction[0] < 0) this.galleryNext();
+                else this.galleryPrev();
+            }
+        }
     }
 }
 

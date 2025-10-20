@@ -1,5 +1,62 @@
 @use '../_variables';
 
+section#profile{
+    
+    max-width: 65em;
+    margin: 1em auto;
+    padding:0.5em 1em;
+    
+    img{
+        max-width: 12em;
+        height: 12em;
+        border-radius: 50%;
+        border: 0.3em solid variables.$primary-brown;
+        margin-right: 2em;
+        display: inline-block;
+        vertical-align: middle;
+        z-index: 1;
+        position: relative;
+        
+        @media screen and (max-width: 800px){
+            height: initial;
+            max-height: initial;
+            max-width: calc(30% - 2em);
+            margin-right: 1em;
+            margin-right: 0;
+        }
+    }
+    
+    div#profile-text{
+        max-width: calc(100% - 18em);
+        display: inline-block;
+        height: 10em;
+        max-height: 10em;
+        vertical-align: middle;
+        border-bottom: 0.2em solid variables.$primary-brown;
+        border-top: 0.2em solid variables.$primary-brown;
+        border-top-right-radius: 1em;
+        border-bottom-right-radius: 1em;
+        margin-left: -7em;
+        padding: 0.5em 3em 0.5em 7em;
+        z-index:0;
+        position: relative;
+        background: linear-gradient(90deg, #eeeeee 99%, #ffffff00 100%);
+        
+        @media screen and (max-width: 800px){
+            max-width: 65%;
+            font-size: 90%;
+            border-bottom: 0;
+            border-top: 0;
+            background: initial;
+            margin-left: initial;
+            padding: 0.3em 0.3em 0.3em 0.8em;
+            margin: 0;
+            height: initial;
+            max-height: initial;
+        }
+    }
+}
+
 section#catalog{
     text-align: center;
     font-size: 0;
@@ -17,7 +74,7 @@ section#catalog{
         margin: 0.5em;
         font-size: initial;
         
-        img.project-image{
+        img.project-image, img.project-image-alt{
             object-fit: cover;
             object-position: center;
             width: 100%;
@@ -28,20 +85,7 @@ section#catalog{
             left: 0;
             transition: opacity 0.5s ease-in-out, scale 0.5s ease-in-out;
         }
-        
-        img.project-image-alt{
-            object-fit: cover;
-            object-position: center;
-            width: 100%;
-            height: 100%;
-            scale: 1;
-            transition: scale 0.5s ease-in-out, opacity 1s ease-in-out;
-            position: absolute;
-            left: 0;
-            transition: opacity 0.5s ease-in-out, scale 0.5s ease-in-out;
-            background-color: red;
-        }
-        
+
         div.project_details{
             position: absolute;
             bottom: 0em;
@@ -81,18 +125,12 @@ section#catalog{
 }
 
 @media (hover: hover) {
-    section#catalog article:hover img{
-        scale: 1.2;
-    }
-    section#catalog article:hover div.project_details{
-        opacity: 0.8;
-    }
+    section#catalog article:hover img{scale: 1.2;}
+    section#catalog article:hover div.project_details{opacity: 0.8;}
 }
 
 @media (hover: none) {
-    section#catalog article div.project_details{
-        opacity: 0.8;
-    }
+    section#catalog article div.project_details{opacity: 0.8;}
 }
 
 

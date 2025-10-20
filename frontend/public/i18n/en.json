@@ -1,0 +1,10 @@
+{
+  "SITE": {
+    "TITLE": "Iñigo Valentin: Leather Work",
+    "DESCRIPTION": "This is a multi-language Angular application."
+  },
+  "FOOTER": {
+    "DEVELOPED": "Version {{ version }} Developed by <a href='{{ authorURL }}'>{{ author }}</a>",
+    "SOURCE": "Source code available on <a href='{{ sourceURL }}'>{{ sourceSite }}</a> under the {{ license }}"
+  }
+}

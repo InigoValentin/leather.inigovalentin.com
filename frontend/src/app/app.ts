@@ -1,6 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ViewEncapsulation } from '@angular/core';
+import { TranslateService, TranslatePipe, TranslateDirective } from '@ngx-translate/core';
 import { Header } from './header/header';
 import { Footer } from './footer/footer';
 
@@ -12,5 +12,13 @@ import { Footer } from './footer/footer';
   encapsulation: ViewEncapsulation.None,
 })
 export class App {
-  protected readonly title = signal('frontend');
+    
+    private translate = inject(TranslateService);
+    
+    constructor(){
+        this.translate.addLangs(['en', 'eu']);
+        this.translate.setFallbackLang('es');
+        // TODO: Get language from browset if not in storage
+        this.translate.use(localStorage.getItem('language') || this.translate.getFallbackLang() || 'es');
+    }
 }
