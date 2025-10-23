@@ -1,4 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { TranslateService, _ } from '@ngx-translate/core';
 import { ProjectService } from '../service/project-service';
@@ -17,22 +18,19 @@ export class Home implements OnInit {
     utilService: UtilService;
     
     private translate = inject(TranslateService)
+    private platform = inject(PLATFORM_ID)
 
     constructor(
       private projectService: ProjectService, private profileService: ProfileService,
       private titleService: Title, private metaService: Meta
     ){
-        this.utilService = new UtilService()
-        this.translate.use("" + localStorage.getItem("language"));
-    }
-
-    ngOnInit(): void {
-        this.projectService.getProjects(1).subscribe(data => { this.projects = data; });
-        this.profileService.getProfile().subscribe(data => { this.profile = data; });
-        this.startInterval();
-        this.translate.use("" + localStorage.getItem("language"));
+        this.utilService = new UtilService();
+        
         // Set meta tags
-        const url: string = window.location.protocol + "//" + window.location.host;
+        console.log("TEST");
+        //const url: string = this.document.location.protocol + "//" + this.document.location.host;
+        const url = "TODO";
+        
         this.metaService.addTag({ property: 'canonical', content: url });
         this.metaService.addTag({ property: 'og:url', content: url });
         this.metaService.addTag({ property: 'og:image', content: url + '/img/logo/leather.png' });
@@ -46,11 +44,19 @@ export class Home implements OnInit {
             this.metaService.addTag({ property: 'description', content: res});
         });
     }
+
+    ngOnInit(): void {
+        this.projectService.getProjects(1).subscribe(data => { this.projects = data; });
+        this.profileService.getProfile().subscribe(data => { this.profile = data; });
+        this.startInterval();
+        
+    }
   
     private delay(ms: number){ return new Promise(resolve => setTimeout(resolve, ms)); }
   
     startInterval() {
         this.intervalId = setInterval(() => {
+            if (!isPlatformBrowser(this.platform)) return;
             const id: number = this.projects[Math.floor(Math.random() * this.projects.length)].id;
             this.projectService.getProjectRandomImage(id.toString()).subscribe(async image => {
                 var img: HTMLImageElement

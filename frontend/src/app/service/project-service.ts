@@ -16,19 +16,19 @@ export class ProjectService {
     if (images == true || parseInt(images) >= 0)
         paramImages = "&images=" + images;
     return this.http.get<ProjectModel[]>(
-      this.apiUrl + "?lang=" + localStorage.getItem('language') + paramImages
+      this.apiUrl + "?lang=" + 'es'/* TODO: localStorage.getItem('language')*/ + paramImages
     );
   }
 
   getProject(id: string): Observable<ProjectModel> {
     return this.http.get<ProjectModel>(
-      `${this.apiUrl}/${id}` + "?lang=" + localStorage.getItem('language')
+      `${this.apiUrl}/${id}` + "?lang=" + 'es'/* TODO: localStorage.getItem('language')*/
     );
   }
   
   getProjectRandomImage(id: string): Observable<ProjectImageModel> {
     return this.http.get<ProjectImageModel>(
-      `${this.apiUrl}/${id}/images/random` + "?lang=" + localStorage.getItem('language')
+      `${this.apiUrl}/${id}/images/random` + "?lang=" + 'es'/* TODO: localStorage.getItem('language')*/
     );
   }
   

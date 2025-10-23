@@ -11,6 +11,6 @@ export class ProfileService {
   constructor(private http: HttpClient) { }
 
   getProfile(): Observable<ProfileModel[]> {
-    return this.http.get<ProfileModel[]>(this.apiUrl + "?lang=" + localStorage.getItem('language'));
+    return this.http.get<ProfileModel[]>(this.apiUrl + "?lang=" + 'es'/* TODO: localStorage.getItem('language')*/);
   }
 }

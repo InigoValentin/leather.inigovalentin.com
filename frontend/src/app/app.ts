@@ -32,21 +32,24 @@ export class App {
         
         let available: String[] = this.languages.available.split("|");
         // If the language is set as a request parameter and its valid, use it.
-        const queryLang = new URLSearchParams(window.location.search).get('lang');
+        // TODO: Disabled in SSR
+        /*const queryLang = new URLSearchParams(window.location.search).get('lang');
         console.log("QUERY LANG: " + queryLang);
         if (queryLang && available.indexOf(queryLang.substring(0, 2).toLowerCase()) != -1)
-            return queryLang.substring(0, 2).toLowerCase();
+            return queryLang.substring(0, 2).toLowerCase();*/
 
         // If the language has been previously set and a valid one is its in local storage, done.
-        if (available.indexOf("" + localStorage.getItem('language')) != -1)
-            return "" + localStorage.getItem('language');
+        // TODO: Disabled in SSR
+        //if (available.indexOf("" + localStorage.getItem('language')) != -1)
+        //    return "" + localStorage.getItem('language');
         
         // If the language is not set, loop the browser accepted languages.
         // When there is a match with the app available languages, return it.
-        for (let l of navigator.languages){
+        // TODO: Disabled in SSR
+        /*for (let l of navigator.languages){
             if ( l.length >= 2 && available.indexOf(l.substring(0, 2).toLowerCase()) != -1)
                 return l.substring(0, 2).toLowerCase();
-        }
+        }*/
         
         // If everything else failed, return the default language.
         return this.languages.default;
@@ -59,7 +62,8 @@ export class App {
         // Detect the best language.
         const lang: string = this.selectLanguage()
         this.translate.use(lang);
-        localStorage.setItem('language', lang)
+        // TODO: Disabled in SSR
+        //localStorage.setItem('language', lang)
         
         // Set meta tags
         this.metaService.addTag({ property: 'author', author });

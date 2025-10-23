@@ -20,7 +20,8 @@ export class Footer{
         { code: 'eu', name: 'Euskara' },
     ];
 
-    currentLanguage = localStorage.getItem('language');
+    // TODO: Disabled in SSR
+    currentLanguage = 'es';//localStorage.getItem('language');
     
     private translate = inject(TranslateService)
     
@@ -29,7 +30,8 @@ export class Footer{
     
     switchLanguage(languageCode: string): void {
         this.currentLanguage = languageCode;
-        localStorage.setItem('language', languageCode);
+        // TODO: Disabled in SSR
+        //localStorage.setItem('language', languageCode);
         this.translate.use(languageCode);
         window.location.reload();
     }
