@@ -15,8 +15,8 @@ export class Footer{
     license: string = license;
     
     languages = [
-        { code: 'en', name: 'English' },
         { code: 'es', name: 'Español' },
+        { code: 'en', name: 'English' },
         { code: 'eu', name: 'Euskara' },
     ];
 

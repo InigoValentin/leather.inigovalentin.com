@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Title } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 import { ProjectService } from '../service/project-service';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, _ } from '@ngx-translate/core';
 import { UtilService } from '../service/util-service';
 import { ProjectModel } from '../model/project';
 import { environment } from '../../environments/environment';
@@ -30,7 +30,7 @@ export class Project {
 
     constructor(
       private route: ActivatedRoute, private projectService:
-      ProjectService, private titleService: Title
+      ProjectService, private titleService: Title, private metaService: Meta
     ){
         this.utilService = new UtilService();
     }
@@ -41,9 +41,37 @@ export class Project {
         this.projectService.getProject("" + id).subscribe(data => {
             this.project = data;
             this.maxIndex = this.project.images.length;
-            this.titleService.setTitle(
-              this.project.title + " - " + this.translate.instant('SITE.TITLE')
+            
+            // Set meta tags
+            const siteUrl: string = window.location.protocol + "//" + window.location.host;
+            const projectUrl: string = siteUrl + '/projects' + this.project.permalink;
+            this.metaService.addTag({ property: 'canonical', content: projectUrl });
+            this.metaService.addTag({ property: 'og:url', content: projectUrl });
+            this.metaService.addTag(
+              { property: 'og:description', content: this.project.description}
             );
+            this.metaService.addTag(
+              { property: 'description', content: this.project.description}
+            );
+            if (this.project.images.length > 0){
+                this.metaService.addTag(
+                  { property: 'og:image', content: this.apiURL + this.project.images[0].path }
+                );
+            }
+            else{
+                this.metaService.addTag(
+                  { property: 'og:image', content: siteUrl + '/img/logo/leather.png' }
+                );
+            }
+            this.translate.get(_('SITE.TITLE')).subscribe((res: string) => {
+                this.titleService.setTitle(this.project?.title + " - " + res);
+                this.metaService.addTag(
+                  { property: 'title', content: this.project?.title + " - " + res }
+                );
+                this.metaService.addTag(
+                  { property: 'og:title', content: this.project?.title + " - " + res }
+                );
+            });
         });
     }
 

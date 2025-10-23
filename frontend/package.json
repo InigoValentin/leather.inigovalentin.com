@@ -4,8 +4,12 @@
   "author": "Iñigo Valentin",
   "authorURL": "https://inigovalentin.com",
   "sourceSite": "Github",
-  "sourceURL": "https://github.com/InigoValentin/LeatherWeb",
+  "sourceURL": "https://github.com/InigoValentin/leather.inigovalentin.com",
   "license": "GPLv3",
+  "languages":{
+    "available": "es|en|eu",
+    "default": "es"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
