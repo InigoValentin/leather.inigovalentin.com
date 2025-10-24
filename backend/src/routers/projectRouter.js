@@ -72,7 +72,11 @@ router.get("/:projectId/images/:imageId", cors({origin: '*', methods: 'GET'}), a
     const data
       = await projectData.getProjectImage(req.params.projectId, req.params.imageId, lang);
     if (!data) res.status(404).json({ error: "Image not found" });
-    else res.json(data);
+    else{
+        res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.json(data);
+    }
 });
 
 module.exports = router;

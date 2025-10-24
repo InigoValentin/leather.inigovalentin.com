@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { PlatformLocation } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
 import { ProjectService } from '../service/project-service';
 import { TranslateService, _ } from '@ngx-translate/core';
@@ -29,8 +30,9 @@ export class Project {
     private maxIndex: number = -1;
 
     constructor(
-      private route: ActivatedRoute, private projectService:
-      ProjectService, private titleService: Title, private metaService: Meta
+      private route: ActivatedRoute, private projectService: ProjectService,
+      private titleService: Title, private metaService: Meta,
+      private platformLocation: PlatformLocation
     ){
         this.utilService = new UtilService();
     }
@@ -43,7 +45,8 @@ export class Project {
             this.maxIndex = this.project.images.length;
             
             // Set meta tags
-            const siteUrl: string = window.location.protocol + "//" + window.location.host;
+            const siteUrl: string
+              = this.platformLocation.protocol + "//" + this.platformLocation.hostname;
             const projectUrl: string = siteUrl + '/projects' + this.project.permalink;
             this.metaService.addTag({ property: 'canonical', content: projectUrl });
             this.metaService.addTag({ property: 'og:url', content: projectUrl });

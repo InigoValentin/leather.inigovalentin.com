@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
  * Provides utilities to use across the app.
  */
 export class UtilService {
-    
+
     /**
      * Generates a srcset attribute for an image from it's src.
      * 
