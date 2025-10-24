@@ -18,6 +18,19 @@ footer{
         span{display: block;}
     }
     
+    @media screen and (max-width: 800px){
+        
+        div#footer-left{
+            width: 60%;
+            padding: 0.3em 0.2em;
+        }
+        div#footer-right{
+            width: 30%;
+            text-align: right;
+            padding: 0.3em 0.1em;
+        }
+    }
+    
     div#footer-left span{
         font-size: 70%;
         margin: 0.3em auto;
