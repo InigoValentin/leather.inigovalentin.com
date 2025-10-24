@@ -12,7 +12,9 @@ var mime = {
     jpg: 'image/jpeg',
     png: 'image/png',
     svg: 'image/svg+xml',
-    js: 'application/javascript'
+    js: 'application/javascript',
+    mp4: 'video/mp4',
+    ogv: 'video/ogg'
 };
 
 // Read (GET) an asset
@@ -33,6 +35,7 @@ router.get("/images/projects/:projectId/:imagePath", async (req, res) => {
     var s = fs.createReadStream(file);
     s.on('open', function () {
         res.setHeader('Content-Type', type);
+        res.setHeader('Accept-Ranges', 'bytes');
         res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
         s.pipe(res);
     });

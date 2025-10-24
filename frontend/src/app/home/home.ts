@@ -57,15 +57,17 @@ export class Home implements OnInit {
                   = <HTMLImageElement>document.getElementById("img-project-" + id);
                 var imgAlt: HTMLImageElement
                   = <HTMLImageElement>document.getElementById("img-project-" + id + "-alt");
-                imgAlt.setAttribute("src", this.apiURL + image.path);
-                imgAlt.setAttribute(
-                  "srcset", this.utilService.generateSrcset(this.apiURL + image.path)
-                );
+                const src = this.apiURL + image.path;
+                const srcset = this.utilService.generateSrcset(this.apiURL + image.path)
+                imgAlt.setAttribute("src", src);
+                imgAlt.setAttribute("srcset", srcset);
                 await this.delay(1000);
+                while (imgAlt.complete == false) await this.delay(100);
                 img.style.opacity = '0';
                 await this.delay(1000);
-                img.setAttribute("src", "" + imgAlt.getAttribute("src"));
-                img.setAttribute("srcset", "" + imgAlt.getAttribute("srcset"));
+                img.setAttribute("src", "" + src);
+                img.setAttribute("srcset", "" + srcset);
+                while (img.complete == false) await this.delay(100);
                 img.style.opacity = '1';
                 await this.delay(1000);
                 imgAlt.removeAttribute("src");

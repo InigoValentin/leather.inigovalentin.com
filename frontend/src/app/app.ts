@@ -33,7 +33,6 @@ export class App {
         let available: String[] = this.languages.available.split("|");
         // If the language is set as a request parameter and its valid, use it.
         const queryLang = new URLSearchParams(window.location.search).get('lang');
-        console.log("QUERY LANG: " + queryLang);
         if (queryLang && available.indexOf(queryLang.substring(0, 2).toLowerCase()) != -1)
             return queryLang.substring(0, 2).toLowerCase();
 
