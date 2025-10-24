@@ -12,8 +12,8 @@
 }
 <section id='catalog'>
   @for (project of projects; track project) {
-    <article class="project">
-      <a href="/projects/{{ project.permalink }}" class='project'>
+    <article class="project" id="project-{{ project.id }}">
+      <a href="/projects/{{ project.permalink }}">
         <img class="project-image-alt" id="img-project-{{project.id}}-alt"/>
         <img
           class="project-image" id="img-project-{{project.id}}"
@@ -27,3 +27,4 @@
     </article>
   }
 </section>
+<input id='apiURL' type='hidden' value='{{ apiURL }}'>
