@@ -1,7 +1,6 @@
 {
-  "name": "leather-backend",
-  "version": "1.0.0",
-  "author": "Iñigo Valentin",
+  "name": "api.leather.inigovalentin.com",
+  "version": "0.1.1",
   "authorURL": "https://inigovalentin.com",
   "sourceSite": "Github",
   "sourceURL": "https://github.com/InigoValentin/leather.inigovalentin.com",
