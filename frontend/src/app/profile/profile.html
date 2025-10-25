@@ -1,0 +1,28 @@
+@if (profile){
+  <section id='profile'>
+    <div id='top'>
+      @if (profile.images[0]){
+        <img
+          id="img-1" src="{{ apiURL }}{{ profile.images[0].path }}"
+          srcset="{{ utilService.generateSrcset(apiURL + profile.images[0].path) }}"
+        />
+      }
+      <div id="profile-text">
+        @for (t of profile.texts; track t) {
+          <p>{{ t.content }}</p>
+        }
+      </div>
+    </div>
+    <div id="profile-images">
+      @for (i of profile.images; track i) {
+        @if (i.id != 1){
+          <img
+	        id="img-{{ i.id }}" src="{{ apiURL }}{{ i.path }}" alt="{{ i.title }}"
+	        srcset="{{ utilService.generateSrcset(apiURL + i.path) }}"
+	      />
+        }
+      }
+    </div>
+  </section>
+}
+

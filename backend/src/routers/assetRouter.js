@@ -49,7 +49,6 @@ router.get("/images/projects/:projectId/:imagePath", async (req, res) => {
 router.get("/images/profile/:imagePath", async (req, res) => {
     var reqpath = req.url.toString().split('?')[0];
     var file = "./assets" + reqpath.replace(/\/$/, '');
-    console.log("GET PROFILE IMAGE: " + file);
 
     var scale = parseInt(req.query.w);
     // Serve a scaled image if width has been specified.

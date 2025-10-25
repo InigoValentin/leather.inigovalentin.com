@@ -1,10 +1,75 @@
 {
   "SITE": {
     "TITLE": "Iñigo Valentin: Leather Work",
-    "DESCRIPTION": "This is a multi-language Angular application."
+    "DESCRIPTION": "My leather projects."
   },
   "FOOTER": {
+    "PROFILE": "More about me",
+    "PRIVACY": "Privacy",
     "DEVELOPED": "Version {{ version }} Developed by <a href='{{ authorURL }}'>{{ author }}</a>",
     "SOURCE": "Source code available on <a href='{{ sourceURL }}'>{{ sourceSite }}</a> under the {{ license }}"
+  },
+  "PROFILE": {
+    "TITLE": "About me",
+    "DESCRIPTION": "About Iñigo Valentin."
+  },
+  "PRIVACY": {
+    "TITLE": "Privacy Policy",
+    "DESCRIPTION": "Privacy & Cookie Policy for Iñigo Valentin",
+    "TEXTS":{
+      "DATE": "Effective Date: September 2, 2025",
+      "LEGAL": "The legal entity operating this website is Iñigo Valentin ('Iñigo Valentin,' 'we', 'us', or 'our').",
+      "EXPLANATION": "This Privacy Policy explains the only way in which we process any data from visitors to this website, which is solely through the use of a single, functional cookie.",
+      "PRINCIPLE": {
+        "TITLE": "1. The Principle: Data Minimisation",
+        "CONTENT": "We are committed to the principle of Data Minimisation, meaning we only collect and process the absolute minimum amount of personal data necessary to provide a usable service. For this website, this means we only use one type of cookie for functional purposes. We do not use analytics, advertising, or tracking technologies."
+      },
+      "INFORMATION": {
+        "TITLE": "2. Information We Process (The Cookie)",
+        "CONTENT": "What We Collect:",
+        "COLLECT": "The only piece of data we store on your device is a single First-Party Functionality Cookie.",
+        "TABLE":{
+          "NAME_HEADER": "Cookie name:",
+          "NAME_CONTENT": "language",
+          "PURPOSE_HEADER": "Purpose:",
+          "PURPOSE_CONTENT": "To remember your preferred language setting.",
+          "DATA_HEADER": "Data Stored:",
+          "DATA_CONTENT": "A simple two-letter language code (e.g., en, es, eu).",
+          "DURATION_HEADER": "Duration:",
+          "DURATION_CONTENT": "12 months.",
+          "BASIS_HEADER": "GDPR Lawful Basis:",
+          "BASIS_CONTENT": "Legitimate Interest / Necessary Functionality."
+        },
+        "PURPOSE": {
+          "HEADER": "Purpose of Processing:",
+          "CONTENT": "The sole purpose of this cookie is to ensure the website is displayed in the language you selected on your previous visit. This improves your user experience by preventing the need to select your language preference every time you navigate the site or a new page."
+        },
+        "BASIS": {
+          "HEADER": "Lawful Basis for Processing (GDPR Article 6(1)(f)):",
+          "CONTENT": "Under the General Data Protection Regulation (GDPR), the use of this cookie is justified by our Legitimate Interest (Article 6(1)(f)) in providing an efficient, requested, and user-friendly experience on our website. Because this cookie is strictly necessary for a function requested by the user (the language display) and does not track you for advertising or profiling, it is exempt from the requirement for explicit consent."
+        }
+      },
+      "DATA": {
+        "TITLE": "3. Data Storage, Security, and Sharing",
+        "STORAGE": "Storage: The only data processing is the storage of the language code on your device (the cookie). No identifying information (like IP addresses, browsing history, or names) is collected or stored on our servers.",
+        "SECURITY": "Security: As no personal data beyond the functional language preference is collected or processed, there is virtually no security risk.",
+        "SHARING": "Data Sharing: We do not share any data with any third parties. We do not use third-party analytics, marketing, or tracking services."
+      },
+      "RIGHTS": {
+        "TITLE": "4. Your Data Protection Rights (GDPR)",
+        "COOKIE": "How to Control the Cookie",
+        "CONTROL": "You can manage or delete this (or any) cookie at any time by accessing the settings menu in your web browser (e.g., Chrome, Firefox, Safari). Please note that deleting the language preference cookie will simply cause the website to use it's default language on your next visit."
+      },
+      "AUTHORITY": {
+        "TITLE": "5. Supervisory Authority",
+        "EXPLANATION": "If you are unsatisfied with how we have handled your data protection concerns, you have the right to lodge a complaint with a supervisory authority under GDPR.",
+        "AUTHORITY": "Relevant Supervisory Authority: Spanish Data Protection Agency (AEPD)."
+      }
+    }
+  },
+  "ERROR": {
+    "TITLE": "Error",
+    "TEXT": "Requested content couldn't be found.",
+    "LINK": "Go back to Home."
   }
 }

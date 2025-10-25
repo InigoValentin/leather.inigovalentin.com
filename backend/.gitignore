@@ -1,5 +1,5 @@
 # Database
-data.sqlite3*
+data-dev.sqlite3
 data.sql
 
 # Environment files

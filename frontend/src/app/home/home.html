@@ -1,12 +1,17 @@
 @if (profile){
   <section id='profile'>
-    <img
-      src="{{ apiURL }}{{ profile.image }}"
-      srcset="{{ utilService.generateSrcset(apiURL + profile.image) }}"
-    />
+    @if (profile.images[0]){
+      <img
+        src="{{ apiURL }}{{ profile.images[0].path }}"
+        srcset="{{ utilService.generateSrcset(apiURL + profile.images[0].path) }}"
+      />
+    }
     <div id="profile-text">
-      <p>{{ profile.bio }}</p>
-      <p>{{ profile.description }}</p>
+      @for (t of profile.texts; track t) {
+        @if (t.home == 1){
+          <p>{{ t.content }}</p>
+        }
+      }
     </div>
   </section>
 }

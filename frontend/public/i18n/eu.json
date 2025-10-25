@@ -1,10 +1,75 @@
 {
   "SITE": {
     "TITLE": "Iñigo Valentin: Trabajos en cuero",
-    "DESCRIPTION": "This is a multi-language Angular application."
+    "DESCRIPTION": "Nire larruzko proiektuak."
   },
   "FOOTER": {
+    "PROFILE": "Niri buruz",
+    "PRIVACY": "Pribatutasuna",
     "DEVELOPED": "Version {{ version }} Developed by <a href='{{ authorURL }}'>{{ author }}</a>",
     "SOURCE": "Source code available on <a href='{{ sourceURL }}'>{{ sourceSite }}</a> under the {{ license }}"
+  },
+  "PROFILE": {
+    "TITLE": "Niri buruz",
+    "DESCRIPTION": "Iñigo Valentini buruz"
+  },
+  "PRIVACY": {
+    "TITLE": "Pribatutasun Politika",
+    "DESCRIPTION": "Iñigo Valentinen Pribatutasun eta Cookie Politika",
+    "TEXTS":{
+      "DATE": "Indarraldiaren data: 2025eko irailaren 2a",
+      "LEGAL": "Webgune hau kudeatzen duen erakunde juridikoa Iñigo Valentin da ('Iñigo Valentin', 'gu', 'gure' edo 'gure').",
+      "EXPLANATION": "Pribatutasun Politika honek webgune honetara datozen bisitarien datuak prozesatzeko modu bakarra azaltzen du, hau da, cookie funtzional bakarra erabiliz soilik.",
+      "PRINCIPLE": {
+        "TITLE": "1. Printzipioa: Datuen Minimizazioa",
+        "CONTENT": "Datuen Minimizazioaren printzipioarekin konprometituta gaude, hau da, zerbitzu erabilgarri bat emateko beharrezkoak diren datu pertsonalen gutxieneko kopurua soilik biltzen eta prozesatzen dugu. Webgune honetarako, horrek esan nahi du cookie mota bakarra erabiltzen dugula helburu funtzionaletarako. Ez ditugu analisi, publizitate edo jarraipen teknologiak erabiltzen."
+      },
+      "INFORMATION": {
+        "TITLE": "2. Prozesatzen dugun informazioa (Cookiea)",
+        "CONTENT": "Zer biltzen dugun:",
+        "COLLECT": "Zure gailuan gordetzen dugun datu bakarra Lehen Aldeko Funtzionaltasun Cookie bakarra da.",
+        "TABLE":{
+          "NAME_HEADER": "Cookiearen izena:",
+          "NAME_CONTENT": "language",
+          "PURPOSE_HEADER": "Helburua:",
+          "PURPOSE_CONTENT": "Zure hizkuntza ezarpen hobetsia gogoratzea.",
+          "DATA_HEADER": "Gordetako datuak:",
+          "DATA_CONTENT": "Bi letrako hizkuntza-kode sinple bat (adibidez, en, es, eu).",
+          "DURATION_HEADER": "Iraupena:",
+          "DURATION_CONTENT": "12 hilabete.",
+          "BASIS_HEADER": "GDPR Oinarri juridikoa:",
+          "BASIS_CONTENT": "Interes legitimoa / Beharrezko funtzionalitatea."
+        },
+        "PURPOSE": {
+          "HEADER": "Prozesamenduaren helburua:",
+          "CONTENT": "Cookie honen helburu bakarra webgunea aurreko bisitan hautatu zenuen hizkuntzan bistaratzea ziurtatzea da. Horrek zure erabiltzaile-esperientzia hobetzen du, gunean edo orrialde berri batean nabigatzen duzun bakoitzean zure hizkuntza-lehentasuna hautatu beharrik ez izatea saihestuz."
+        },
+        "BASIS": {
+          "HEADER": "Prozesamenduaren oinarri juridikoa (GDPR 6(1)(f) artikulua):",
+          "CONTENT": "Datuak Babesteko Erregelamendu Orokorraren (GDPR) arabera, cookie honen erabilera gure Interes Legitimoak (6(1)(f) artikulua) justifikatzen du, gure webgunean esperientzia eraginkor, eskatu eta erabilerraza eskaintzeko. Cookie hau erabiltzaileak eskatutako funtzio baterako (hizkuntza bistaratzea) guztiz beharrezkoa denez eta ez zaituenez publizitaterako edo profilak egiteko jarraitzen, baimen esplizituaren beharretik salbuetsita dago."
+        }
+      },
+      "DATA": {
+        "TITLE": "3. Datuen Biltegiratzea, Segurtasuna eta Partekatzea.",
+        "STORAGE": "Biltegiratzea: Datuen prozesamendu bakarra zure gailuan hizkuntza-kodea (cookiea) gordetzea da. Ez da identifikazio-informaziorik (IP helbideak, nabigazio-historia edo izenak bezala) biltzen edo gordetzen gure zerbitzarietan.",
+        "SECURITY": "Segurtasuna: Hizkuntza funtzionalaren lehentasunaz gaindiko datu pertsonalik biltzen edo prozesatzen ez denez, ia ez dago segurtasun-arriskurik.",
+        "SHARING": "Datuen Partekatzea: Ez dugu daturik hirugarrenekin partekatzen. Ez dugu hirugarrenen analisi-, marketin- edo jarraipen-zerbitzurik erabiltzen."
+      },
+      "RIGHTS": {
+        "TITLE": "4. Zure Datuen Babeserako Eskubideak (GDPR)",
+        "COOKIE": "Nola Kontrolatu Cookiea",
+        "CONTROL": "Cookie hau (edo beste edozein) edozein unetan kudeatu edo ezaba dezakezu zure web arakatzailearen ezarpenen menura sartuz (adibidez, Chrome, Firefox, Safari). Kontuan izan hizkuntza-lehentasunen cookiea ezabatzeak webguneak bere hizkuntza lehenetsia erabiliko duela hurrengo bisitan."
+      },
+      "AUTHORITY": {
+        "TITLE": "5. Gainbegiratze Agintaritza",
+        "EXPLANATION": "Zure datuen babesari buruzko kezkak nola kudeatu ditugun pozik ez bazaude, GDPRren arabera gainbegiratze-agintaritza bati kexa aurkezteko eskubidea duzu.",
+        "AUTHORITY": "Dagokion gainbegiratze-agintaritza: Espainiako Datuak Babesteko Agentzia (AEPD)."
+      }
+    }
+  },
+  "ERROR": {
+    "TITLE": "Errorea",
+    "TEXT": "Eskatutako helbidea ez da existitzen.",
+    "LINK": "Hasierara itzuli."
   }
 }

@@ -43,7 +43,9 @@ router.get("/:id", cors({origin: '*', methods: 'GET'}), async (req, res) => {
       && process.env.AVAILABLE_LANGUAGES.split(" ").includes(req.query.lang.toLowerCase())
     ) lang = req.query.lang.toLowerCase();
     const data = await projectData.getProject(req.params.id, lang, images);
-    if (!data) res.status(404).json({ error: "Project not found" });
+    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    if (!data || data == "[]") res.status(404).json({ error: "Project not found" });
     else res.json(data);
 });
 
@@ -69,12 +71,11 @@ router.get("/:projectId/images/:imageId", cors({origin: '*', methods: 'GET'}), a
       req.query.lang
       && process.env.AVAILABLE_LANGUAGES.split(" ").includes(req.query.lang.toLowerCase())
     ) lang = req.query.lang.toLowerCase();
-    const data
-      = await projectData.getProjectImage(req.params.projectId, req.params.imageId, lang);
+    const data = await projectData.getProjectImage(req.params.projectId, req.params.imageId, lang);
+    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     if (!data) res.status(404).json({ error: "Image not found" });
     else{
-        res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
-        res.setHeader('Access-Control-Allow-Origin', '*');
         res.json(data);
     }
 });

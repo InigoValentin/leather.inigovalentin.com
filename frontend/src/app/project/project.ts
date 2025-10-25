@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { PlatformLocation } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
 import { ProjectService } from '../service/project-service';
@@ -30,7 +30,7 @@ export class Project {
     private maxIndex: number = -1;
 
     constructor(
-      private route: ActivatedRoute, private projectService: ProjectService,
+      private route: ActivatedRoute, private projectService: ProjectService, private router: Router,
       private titleService: Title, private metaService: Meta,
       private platformLocation: PlatformLocation
     ){
@@ -40,7 +40,8 @@ export class Project {
     ngOnInit(): void {
         const id = this.route.snapshot.paramMap.get('id');
         // Use the id to fetch data or perform actions
-        this.projectService.getProject("" + id).subscribe(data => {
+        this.projectService.getProject("" + id).subscribe(
+          data => {
             this.project = data;
             this.maxIndex = this.project.images.length;
             
@@ -75,7 +76,9 @@ export class Project {
                   { property: 'og:title', content: this.project?.title + " - " + res }
                 );
             });
-        });
+        },
+        err => { this.router.navigate(['/error']); }
+      );
     }
 
     /**
