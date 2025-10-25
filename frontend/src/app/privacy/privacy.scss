@@ -1,0 +1,29 @@
+@use '../_variables';
+
+section{
+    max-width: 70em;
+    margin: auto auto;
+    padding: 0 2em;
+
+    article{
+        margin-left: 2em;
+        
+        h3{ margin-left: -1em;}
+        
+        table{
+            
+            border-collapse: collapse;
+            
+            td, th{
+                border: 1px solid black;
+                text-align: left;
+                padding: 0.1em 0.5em;
+            }
+            
+            th{font-weight: bold;}
+        }
+    }
+}
+
+
+

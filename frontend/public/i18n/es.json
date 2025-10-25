@@ -1,10 +1,75 @@
 {
   "SITE": {
     "TITLE": "Iñigo Valentin: Trabajos en cuero",
-    "DESCRIPTION": "This is a multi-language Angular application."
+    "DESCRIPTION": "Proyectos de cuero hechos por mí'."
   },
   "FOOTER": {
+    "PROFILE": "Más sobre mí",
+    "PRIVACY": "Privacidad",
     "DEVELOPED": "Versión {{ version }}. Desarrollado por <a href='{{ authorURL }}'>{{ author }}</a>",
     "SOURCE": "Código fuende disponible en <a href='{{ sourceURL }}'>{{ sourceSite }}</a> bajo licencia {{ license }}"
+  },
+  "PROFILE": {
+    "TITLE": "Sobre mí",
+    "DESCRIPTION": "Sobre Iñigo Valentin."
+  },
+  "PRIVACY": {
+    "TITLE": "Política de Privacidad",
+    "DESCRIPTION": "Política de Privacidad y Cookies de Iñigo Valentin",
+    "TEXTS":{
+      "DATE": "Fecha de entrada en vigor: 2 de septiembre de 2025",
+      "LEGAL": "La entidad legal que opera este sitio web es Iñigo Valentin («Iñigo Valentin», «nosotros», «nos» o «nuestro»).",
+      "EXPLANATION": "Esta Política de Privacidad explica la única forma en que procesamos los datos de los visitantes de este sitio web, que es mediante el uso de una única cookie funcional.",
+      "PRINCIPLE": {
+        "TITLE": "1. Principio: Minimización de Datos",
+        "CONTENT": "Nos comprometemos con el principio de Minimización de Datos, lo que significa que solo recopilamos y procesamos la cantidad mínima de datos personales necesaria para ofrecer un servicio útil. En este sitio web, esto significa que solo utilizamos un tipo de cookie con fines funcionales. No utilizamos tecnologías de análisis, publicidad ni seguimiento."
+      },
+      "INFORMATION": {
+        "TITLE": "2. Información que procesamos (la cookie)",
+        "CONTENT": "Qué recopilamos:",
+        "COLLECT": "El único dato que almacenamos en su dispositivo es una única cookie de funcionalidad propia.",
+        "TABLE":{
+          "NAME_HEADER": "Nombre de la cookie:",
+          "NAME_CONTENT": "language",
+          "PURPOSE_HEADER": "Finalidad:",
+          "PURPOSE_CONTENT": "Recordar su configuración de idioma preferida.",
+          "DATA_HEADER": "Datos almacenados:",
+          "DATA_CONTENT": "Un código de idioma simple de dos letras (p. ej., en, es, eu).",
+          "DURATION_HEADER": "Duración:",
+          "DURATION_CONTENT": "12 meses.",
+          "BASIS_HEADER": "Base legal del RGPD:",
+          "BASIS_CONTENT": "Interés legítimo / Funcionalidad necesaria."
+        },
+        "PURPOSE": {
+          "HEADER": "Finalidad del tratamiento:",
+          "CONTENT": "El único propósito de esta cookie es garantizar que el sitio web se muestre en el idioma seleccionado en su visita anterior. Esto mejora su experiencia de usuario al evitar tener que seleccionar su preferencia de idioma cada vez que navega por el sitio web o por una nueva página."
+        },
+        "BASIS": {
+          "HEADER": "Base legal del tratamiento (Artículo 6(1)(f) del RGPD):",
+          "CONTENT": "Según el Reglamento General de Protección de Datos (RGPD), el uso de esta cookie está justificado por nuestro interés legítimo (Artículo 6(1)(f)) en proporcionar una experiencia eficiente, solicitada y fácil de usar en nuestro sitio web. Dado que esta cookie es estrictamente necesaria para una función solicitada por el usuario (el idioma mostrado) y no lo rastrea con fines publicitarios ni de elaboración de perfiles, está exenta del requisito de consentimiento explícito."
+        }
+      },
+      "DATA": {
+        "TITLE": "3. Almacenamiento, seguridad y compartición de datos",
+        "STORAGE": "Almacenamiento: El único procesamiento de datos es el almacenamiento del código de idioma en su dispositivo (la cookie). No se recopila ni almacena información de identificación (como direcciones IP, historial de navegación o nombres) en nuestros servidores.",
+        "SECURITY": "Seguridad: Dado que no se recopilan ni procesan datos personales más allá de la preferencia de idioma funcional, prácticamente no existe ningún riesgo de seguridad.",
+        "SHARING": "Compartición de datos: No compartimos datos con terceros. No utilizamos servicios de análisis, marketing ni seguimiento de terceros."
+      },
+      "RIGHTS": {
+        "TITLE": "4. Sus derechos de protección de datos (RGPD)",
+        "COOKIE": "Cómo controlar las cookies",
+        "CONTROL": "Puede administrar o eliminar esta (o cualquier) cookie en cualquier momento accediendo al menú de configuración de su navegador web (por ejemplo, Chrome, Firefox, Safari). Tenga en cuenta que eliminar la cookie de preferencia de idioma simplemente hará que el sitio web utilice el idioma por defecto en su próxima visita."
+      },
+      "AUTHORITY": {
+        "TITLE": "5. Autoridad de Control",
+        "EXPLANATION": "Si no está satisfecho con la gestión de sus inquietudes sobre protección de datos, tiene derecho a presentar una reclamación ante una autoridad de control conforme al RGPD.",
+        "AUTHORITY": "Autoridad de Control Competente: Agencia Española de Protección de Datos (AEPD)."
+      }
+    }
+  },
+  "ERROR": {
+    "TITLE": "Error",
+    "TEXT": "La direccion solicitada no existe.",
+    "LINK": "Volver al inicio."
   }
 }

@@ -57,6 +57,7 @@ projectData.getProject = function(id, lang = null, images = null) {
           parseInt(id), String(id),
           async (err, row) => {
             if(err) reject(err);
+            else if (!row) resolve("[]");
             else{
                 if (images == false || parseInt(images) <= 0) resolve(row);
                 else{

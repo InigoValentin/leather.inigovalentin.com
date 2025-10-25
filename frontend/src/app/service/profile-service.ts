@@ -12,7 +12,10 @@ export class ProfileService {
   private translate = inject(TranslateService);
   constructor(private http: HttpClient) { }
 
-  getProfile(): Observable<ProfileModel[]> {
-    return this.http.get<ProfileModel[]>(this.apiUrl + "?lang=" + this.translate.getCurrentLang());
+  getProfile(images: any, texts: string): Observable<ProfileModel[]> {
+    return this.http.get<ProfileModel[]>(
+      this.apiUrl + "?lang=" + this.translate.getCurrentLang()
+      + "&images=" + images + "&texts=" + texts
+    );
   }
 }

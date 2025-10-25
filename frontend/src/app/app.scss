@@ -8,6 +8,16 @@ body{
   white-space-collapse: collapse;
 }
 
+app-root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
+  main{
+    flex-grow: 1;
+  }
+}
+
 h1, h2, h3 {
   color: variables.$primary-brown;
 }

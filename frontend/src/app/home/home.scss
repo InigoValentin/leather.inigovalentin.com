@@ -54,6 +54,10 @@ section#profile{
             height: initial;
             max-height: initial;
         }
+        
+        p{margin: 0.3em 0;}
+        
+        p:first-child{font-weight: bold;}
     }
 }
 

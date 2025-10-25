@@ -1,6 +1,9 @@
 {
   "name": "leather-backend",
   "version": "0.1.0",
+  "authorURL": "https://inigovalentin.com",
+  "sourceSite": "Github",
+  "sourceURL": "https://github.com/InigoValentin/leather.inigovalentin.com",
   "description": "",
   "main": "src/server.js",
   "scripts": {
