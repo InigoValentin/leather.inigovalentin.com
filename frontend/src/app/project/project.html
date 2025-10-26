@@ -1,5 +1,5 @@
 @if (project){
-  <div id='details'>
+  <section id='details'>
     @if (project.images.length > 0){
       <img
         (click)=galleryOpen(1); id='img-1' class='img img_main'
@@ -10,8 +10,8 @@
     }
       <h2 id='project_title'>{{ project.title }}</h2>
       <p [innerHTML]='project.description'></p>
-  </div>
-  <div id='images'>
+  </section>
+  <section id='images'>
     @for (image of project.images; track image.id) {
       @if (image.id > 1){
         @if (image.video == 0){
@@ -35,7 +35,7 @@
         }
       }
     }
-  </div>
+  </section>
   <div id='gallery-cover' onClick='galleryClose();'></div>
     <div
       id='gallery'

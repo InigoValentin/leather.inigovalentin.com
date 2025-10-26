@@ -5,9 +5,8 @@ main{
     margin: auto;
 }
 
-div#details{
+section#details{
     min-height: 24em;
-    margin: auto 4em 0 4em;
     
     h2{
         font-size: 300%;
@@ -27,7 +26,7 @@ div#details{
     @media only screen and (max-width : 600px) {margin: auto 1em;}
 }
 
-div#images{text-align: center;}
+section#images{text-align: center;}
 
 img.img, video.img{
     vertical-align: middle;

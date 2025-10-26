@@ -1,21 +1,6 @@
 const express = require("express");
-var fs = require('fs');
 var path = require('path');
-const cors = require('cors');
 const router = express.Router();
-
-var mime = {
-    html: 'text/html',
-    txt: 'text/plain',
-    css: 'text/css',
-    gif: 'image/gif',
-    jpg: 'image/jpeg',
-    png: 'image/png',
-    svg: 'image/svg+xml',
-    js: 'application/javascript',
-    mp4: 'video/mp4',
-    ogv: 'video/ogg'
-};
 
 // Read (GET) an asset
 router.get("/images/projects/:projectId/:imagePath", async (req, res) => {
@@ -31,18 +16,14 @@ router.get("/images/projects/:projectId/:imagePath", async (req, res) => {
         }
         file = file.replace("/assets/images/", "/assets/images_scaled/x" + width + "/");
     }
-    var type = mime[path.extname(file).slice(1)] || 'text/plain';
-    var s = fs.createReadStream(file);
-    s.on('open', function () {
-        res.setHeader('Content-Type', type);
-        res.setHeader('Accept-Ranges', 'bytes');
-        res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
-        s.pipe(res);
-    });
-    s.on('error', function () {
-        res.setHeader('Content-Type', 'text/plain');
-        res.statusCode = 404;
-        res.end('Not found');
+    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+    var options = {root: path.join(__dirname, "../../")}
+    res.sendFile(file, options, function(err){
+        if (err){
+            res.setHeader('Content-Type', 'text/plain');
+            res.statusCode = 404;
+            res.end('Not found');
+        }
     });
 });
 
@@ -60,17 +41,14 @@ router.get("/images/profile/:imagePath", async (req, res) => {
         }
         file = file.replace("/assets/images/", "/assets/images_scaled/x" + width + "/");
     }
-    var type = mime[path.extname(file).slice(1)] || 'text/plain';
-    var s = fs.createReadStream(file);
-    s.on('open', function () {
-        res.setHeader('Content-Type', type);
-        res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
-        s.pipe(res);
-    });
-    s.on('error', function () {
-        res.setHeader('Content-Type', 'text/plain');
-        res.statusCode = 404;
-        res.end('Not found');
+    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+    var options = {root: path.join(__dirname, "../../")}
+    res.sendFile(file, options, function(err){
+        if (err){
+            res.setHeader('Content-Type', 'text/plain');
+            res.statusCode = 404;
+            res.end('Not found');
+        }
     });
 });
 

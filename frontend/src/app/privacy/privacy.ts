@@ -1,10 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PlatformLocation } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { TranslateService, _, TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-profile', templateUrl: './privacy.html', styleUrl: './privacy.scss',
+  selector: 'app-privacy', templateUrl: './privacy.html', styleUrl: './privacy.scss',
   standalone: true, imports: [TranslatePipe]
 })
 export class Privacy {
