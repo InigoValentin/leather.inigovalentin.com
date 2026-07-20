@@ -3,6 +3,7 @@ import { PlatformLocation } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { TranslateService, _ } from '@ngx-translate/core';
 import { ProfileService } from '../service/profile-service';
+import { SeoService } from '../service/seo-service';
 import { UtilService } from '../service/util-service';
 import { environment } from '../../environments/environment';
 
@@ -17,7 +18,8 @@ export class Profile implements OnInit {
 
     constructor(
       private profileService: ProfileService, private titleService: Title,
-      private metaService: Meta, private platformLocation: PlatformLocation
+      private metaService: Meta, private platformLocation: PlatformLocation,
+      private seoService: SeoService
     ){
         this.utilService = new UtilService();
         
@@ -46,5 +48,6 @@ export class Profile implements OnInit {
 
     ngOnInit(): void {
         this.profileService.getProfile(true, "profile").subscribe(data => { this.profile = data; });
+        this.seoService.set("@type", "ProfilePage")
     }
 }

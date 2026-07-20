@@ -2,8 +2,8 @@ const express = require("express");
 var path = require('path');
 const router = express.Router();
 
-// Read (GET) an asset
-router.get("/images/projects/:projectId/:imagePath", async (req, res) => {
+// Read (GET) project assets
+const sendProjectAsset = async (req, res) => {
     var reqpath = req.url.toString().split('?')[0];
     var file = "./assets" + reqpath.replace(/\/$/, '');
     var scale = parseInt(req.query.w);
@@ -25,7 +25,12 @@ router.get("/images/projects/:projectId/:imagePath", async (req, res) => {
             res.end('Not found');
         }
     });
-});
+};
+
+router.get([
+    "/images/projects/:projectId/:imagePath",
+    "/images/projects/:projectId/:child/:imagePath"
+], sendProjectAsset);
 
 router.get("/images/profile/:imagePath", async (req, res) => {
     var reqpath = req.url.toString().split('?')[0];

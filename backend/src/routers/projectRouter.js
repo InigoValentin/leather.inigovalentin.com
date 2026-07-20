@@ -27,7 +27,11 @@ router.get("/", cors({origin: '*', methods: 'GET'}), async (req, res) => {
       req.query.lang
       && process.env.AVAILABLE_LANGUAGES.split(" ").includes(req.query.lang.toLowerCase())
     ) lang = req.query.lang.toLowerCase();
-    const data = await projectData.getProjects(lang, images);
+    var children = true;
+    if (req.query.children == "false") children = false;
+    else if (parseInt(req.query.children) != NaN && parseInt(req.query.children) >= 0)
+        children = parseInt(req.query.children);
+    const data = await projectData.getProjects(children, lang, images);
     res.json(data);
 });
 
@@ -42,7 +46,11 @@ router.get("/:id", cors({origin: '*', methods: 'GET'}), async (req, res) => {
       req.query.lang
       && process.env.AVAILABLE_LANGUAGES.split(" ").includes(req.query.lang.toLowerCase())
     ) lang = req.query.lang.toLowerCase();
-    const data = await projectData.getProject(req.params.id, lang, images);
+    var children = true;
+    if (req.query.children == "false") children = false;
+    else if (parseInt(req.query.children) != NaN && parseInt(req.query.children) >= 0)
+        children = parseInt(req.query.children);
+    const data = await projectData.getProject(req.params.id, children, lang, images);
     res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
     res.setHeader('Access-Control-Allow-Origin', '*');
     if (!data || data == "[]") res.status(404).json({ error: "Project not found" });

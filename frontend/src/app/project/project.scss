@@ -26,6 +26,28 @@ section#details{
     @media only screen and (max-width : 600px) {margin: auto 1em;}
 }
 
+section.children{
+    margin-left: 4em;
+    margin-right: 4em;
+    h3{
+        font-size: 150%;
+        border-bottom: 0.2em solid;
+        margin-left: -2em;
+        margin-right: -2em;
+        
+        @media only screen and (max-width : 800px){
+            margin-left: 0;
+            margin-right: 0;
+            margin-bottom: 0.3em;
+            border-bottom: 0.03em solid;
+            text-align: center;
+        }
+    }
+    section.children-images{
+        text-align: center;
+    }
+}
+
 section#images{text-align: center;}
 
 img.img, video.img{

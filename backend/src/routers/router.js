@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const projectRouter = require("./projectRouter.js");
 const profileRouter = require("./profileRouter.js");
+const sitemapData = require("../data/sitemapData.js");
 const assetRouter = require("./assetRouter.js");
 
 const router = express.Router();
@@ -22,6 +23,12 @@ router.get("/", cors({origin: '*', methods: 'GET'}), async (req, res) => {
       }
     };
     res.json(api);
+});
+
+router.get("/sitemap.xml", async (req, res) => {
+    const data = await sitemapData.generateSitemap();
+    res.set('Content-Type', 'application/xml');
+    res.send(data);
 });
 
 module.exports = router;
