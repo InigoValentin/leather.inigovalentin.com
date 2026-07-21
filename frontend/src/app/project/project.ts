@@ -47,7 +47,7 @@ export class Project {
 
               if (this.project.images.length === 0) {
                   for (const child of this.project.children) {
-                      const childFirstImage = child.images.shift();
+                      const childFirstImage = child.images[0];
                       if (childFirstImage) this.project.images.push(childFirstImage);
                   }
               }
@@ -125,7 +125,7 @@ export class Project {
         }
         cover.style.display = 'block';
         cover.style.opacity = '0.6';
-        gallery.style.display = 'block';
+        gallery.style.display = 'flex';
         gallery.style.opacity = '1';
         if (parsedIndex >= 1 && parsedIndex <= this.maxIndex){
             this.curIndex = parsedIndex;
