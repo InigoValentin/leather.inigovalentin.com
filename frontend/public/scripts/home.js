@@ -54,8 +54,7 @@ async function startInterval(){
     apiURL = document.getElementById("apiURL").value;
     intervalId = setInterval(() => {
         const projects = document.getElementsByClassName('project');
-        const id = projects[Math.floor(Math.random() * projects.length)].id.substring(8);
-
+        const id = projects[Math.floor(Math.random() * (projects.length - 1))].id.substring(8);
         // TODO: ADD lang
         fetch(apiURL + "/projects/" + id + "/images/random")
           .then(response => response.json())

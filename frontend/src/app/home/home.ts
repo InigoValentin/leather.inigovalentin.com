@@ -8,7 +8,7 @@ import { UtilService } from '../service/util-service';
 import { ProjectModel } from '../model/project';
 import { environment } from '../../environments/environment';
 
-@Component({ selector: 'app-home', templateUrl: './home.html', styleUrl: './home.scss'})
+@Component({ selector: 'app-home', templateUrl: './home.html', styleUrls: ['./home.scss']})
 export class Home implements OnInit {
     projects: ProjectModel[] = [];
     profile: any;
@@ -42,7 +42,19 @@ export class Home implements OnInit {
     }
 
     ngOnInit(): void {
-        this.projectService.getProjects(1).subscribe(data => { this.projects = data; });
+        this.projectService.getProjects(1).subscribe(data => {
+            this.projects = data;
+
+            for (const project of this.projects) {
+                if (project.images.length > 0 || !project.children || project.children.length === 0)
+                    continue;
+
+                const firstChild = project.children[0];
+                const firstChildImage = firstChild.images.shift();
+                if (firstChildImage)
+                    project.images.push(firstChildImage);
+            }
+        });
         this.profileService.getProfile(1, "home").subscribe(data => { this.profile = data; });
     }
 }

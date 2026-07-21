@@ -7,4 +7,5 @@ export interface ProjectImageModel{
     title: string;
     description: string;
     priority: number;
+    galleryIndex?: number;
 }

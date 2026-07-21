@@ -9,13 +9,14 @@ import { ProjectModel } from '../model/project';
 import { environment } from '../../environments/environment';
 
 @Component({
-  selector: 'app-project', templateUrl: './project.html', styleUrl: './project.scss'
+    selector: 'app-project', templateUrl: './project.html', styleUrls: ['./project.scss']
 })
 export class Project {
     
     project: ProjectModel | undefined;
     apiURL: string = environment.apiUrl;
     utilService: UtilService;
+    private galleryIndexMap = new Map<string, number>();
     
     private translate = inject(TranslateService)
     
@@ -43,42 +44,70 @@ export class Project {
         this.projectService.getProject("" + id).subscribe(
           data => {
             this.project = data;
-            this.maxIndex = this.project.images.length;
+
+              if (this.project.images.length === 0) {
+                  for (const child of this.project.children) {
+                      const childFirstImage = child.images[0];
+                      if (childFirstImage) this.project.images.push(childFirstImage);
+                  }
+              }
+
+            this.buildGalleryIndexMap();
             
             // Set meta tags
-            const siteUrl: string
-              = this.platformLocation.protocol + "//" + this.platformLocation.hostname;
+            const siteUrl: string = this.platformLocation.protocol + "//" + this.platformLocation.hostname;
             const projectUrl: string = siteUrl + '/projects' + this.project.permalink;
             this.metaService.addTag({ property: 'canonical', content: projectUrl });
             this.metaService.addTag({ property: 'og:url', content: projectUrl });
-            this.metaService.addTag(
-              { property: 'og:description', content: this.project.description}
-            );
-            this.metaService.addTag(
-              { property: 'description', content: this.project.description}
-            );
-            if (this.project.images.length > 0){
-                this.metaService.addTag(
-                  { property: 'og:image', content: this.apiURL + this.project.images[0].path }
-                );
-            }
-            else{
-                this.metaService.addTag(
-                  { property: 'og:image', content: siteUrl + '/img/logo/leather.png' }
-                );
-            }
+            this.metaService.addTag({ property: 'og:description', content: this.project.description});
+            this.metaService.addTag({ property: 'description', content: this.project.description});
+            if (this.project.images.length > 0)
+                this.metaService.addTag({ property: 'og:image', content: this.apiURL + this.project.images[0].path });
+            else this.metaService.addTag({ property: 'og:image', content: siteUrl + '/img/logo/leather.png' });
             this.translate.get(_('SITE.TITLE')).subscribe((res: string) => {
                 this.titleService.setTitle(this.project?.title + " - " + res);
-                this.metaService.addTag(
-                  { property: 'title', content: this.project?.title + " - " + res }
-                );
-                this.metaService.addTag(
-                  { property: 'og:title', content: this.project?.title + " - " + res }
-                );
+                this.metaService.addTag({ property: 'title', content: this.project?.title + " - " + res });
+                this.metaService.addTag({ property: 'og:title', content: this.project?.title + " - " + res });
             });
         },
         err => { this.router.navigate(['/error']); }
       );
+    }
+
+    private buildGalleryIndexMap(): void {
+        this.galleryIndexMap.clear();
+        let index = 1;
+
+        if (!this.project) {
+            this.maxIndex = 0;
+            return;
+        }
+
+        for (const image of this.project.images)
+            this.galleryIndexMap.set(this.getProjectImageKey(image.id), index++);
+
+        for (const child of this.project.children ?? []) {
+            for (const image of child.images ?? [])
+                this.galleryIndexMap.set(this.getChildImageKey(child.id, image.id), index++);
+        }
+
+        this.maxIndex = index - 1;
+    }
+
+    private getProjectImageKey(imageId: number): string {
+        return 'project:' + imageId;
+    }
+
+    private getChildImageKey(childId: number, imageId: number): string {
+        return 'child:' + childId + ':' + imageId;
+    }
+
+    getGalleryIndexForProjectImage(imageId: number): number {
+        return this.galleryIndexMap.get(this.getProjectImageKey(imageId)) ?? -1;
+    }
+
+    getGalleryIndexForChildImage(childId: number, imageId: number): number {
+        return this.galleryIndexMap.get(this.getChildImageKey(childId, imageId)) ?? -1;
     }
 
     /**
@@ -87,17 +116,22 @@ export class Project {
      * @param index Index of the photo to display
      */
     galleryOpen(index: any){
+        const parsedIndex = Number(index);
         let cover: HTMLDivElement = <HTMLDivElement> document.getElementById('gallery-cover');
         let gallery: HTMLDivElement = <HTMLDivElement> document.getElementById('gallery');
+        if (Number.isNaN(parsedIndex)) {
+            console.error('Invalid image index: ' + index + '/' + this.maxIndex);
+            return;
+        }
         cover.style.display = 'block';
         cover.style.opacity = '0.6';
-        gallery.style.display = 'block';
+        gallery.style.display = 'flex';
         gallery.style.opacity = '1';
-        if (index >= 0 && index <= this.maxIndex){
-            this.curIndex = index;
+        if (parsedIndex >= 1 && parsedIndex <= this.maxIndex){
+            this.curIndex = parsedIndex;
             this.gallerySet();
         }
-        else console.error('Invalid image index: ' + index + '/' + this.maxIndex);
+        else console.error('Invalid image index: ' + parsedIndex + '/' + this.maxIndex);
     }
 
     /**
@@ -125,22 +159,21 @@ export class Project {
         fade.style.display = 'block';
         fade.style.opacity = '1';
         await this.delay(200);
-        let titleText = document.getElementById('img-' + this.curIndex)?.getAttribute("alt") || "";
-        if (titleText != null && titleText.length > 0 && titleText != "" + this.project?.title)
-            titleText = ': ' + titleText;
-        else titleText = '';
+        const activeImage = document.getElementById('img-' + this.curIndex);
+        const imageTitle = activeImage?.getAttribute('alt') || '';
+        const childTitle = activeImage?.dataset['childTitle'] || '';
+        let titleText = '';
+        if (childTitle.length > 0) titleText += ' - ' + childTitle;
+        if (imageTitle.length > 0) titleText += ': ' + imageTitle;
         let title: HTMLSpanElement = <HTMLSpanElement> document.getElementById('gallery-title');
-        let text: HTMLParagraphElement
-          = <HTMLParagraphElement> document.getElementById('gallery-text');
+        let text: HTMLParagraphElement = <HTMLParagraphElement> document.getElementById('gallery-text');
         let image: HTMLImageElement = <HTMLImageElement> document.getElementById('gallery-img');
         let video: HTMLVideoElement = <HTMLVideoElement> document.getElementById('gallery-video');
         title.innerHTML = titleText;
         if (document.getElementById('img-' + this.curIndex)?.dataset["video"] == 'true'){
             image.style.display = 'none';
             video.style.display = 'block';
-            video.setAttribute(
-              "src", document.getElementById('img-' + this.curIndex)?.getAttribute("src") || ""
-            );
+            video.setAttribute("src", document.getElementById('img-' + this.curIndex)?.getAttribute("src") || "");
         }
         else{
             video.pause();
@@ -148,11 +181,9 @@ export class Project {
             video.style.display = 'none';
             image.style.display = 'block';
             image.src = document.getElementById('img-' + this.curIndex)?.getAttribute("src") || "";
-            image.srcset
-              = document.getElementById('img-' + this.curIndex)?.getAttribute("srcset") || "";
+            image.srcset = document.getElementById('img-' + this.curIndex)?.getAttribute("srcset") || "";
         }
-        let description: string
-          = document.getElementById('img-' + this.curIndex)?.dataset["description"] || "";
+        let description: string = document.getElementById('img-' + this.curIndex)?.dataset["description"] || "";
         text.innerHTML = description;
         if (description.length > 0) text.style.display = 'block';
         else text.style.display = 'none';
@@ -183,7 +214,6 @@ export class Project {
     private swipeTime?: number;
     
     gallerySwipe(e: TouchEvent, when: string): void {
-        console.log("SWIPE");
         const coord: [number, number] = [e.changedTouches[0].pageX, e.changedTouches[0].pageY];
         const time = new Date().getTime();
         if (when === 'start') {
@@ -193,10 +223,7 @@ export class Project {
         else if (this.swipeCoord && this.swipeTime && when === 'end') {
             const direction = [coord[0] - this.swipeCoord[0], coord[1] - this.swipeCoord[1]];
             const duration = time - this.swipeTime;
-            if (
-              duration < 1000
-              && Math.abs(direction[0]) > 30 && Math.abs(direction[0]) > Math.abs(direction[1] * 3)
-            ){ 
+            if (duration < 1000 && Math.abs(direction[0]) > 30 && Math.abs(direction[0]) > Math.abs(direction[1] * 3)){ 
                 if (direction[0] < 0) this.galleryNext();
                 else this.galleryPrev();
             }

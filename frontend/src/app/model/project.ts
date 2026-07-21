@@ -7,4 +7,5 @@ export interface ProjectModel{
   description: string;
   priority: number;
   images: ProjectImageModel[];
+  children: ProjectModel[];
 }

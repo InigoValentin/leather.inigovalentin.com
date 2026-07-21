@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { version, author, authorURL, sourceSite, sourceURL, license } from '../../../package.json';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
-import { SsrCookieService } from 'ngx-cookie-service-ssr';
+import { LanguageService } from '../service/language-service';
 
 @Component({
-    selector: 'app-footer', templateUrl: './footer.html', styleUrl: './footer.scss',
+    selector: 'app-footer', templateUrl: './footer.html', styleUrls: ['./footer.scss'],
     standalone: true, imports: [TranslatePipe]
  })
 export class Footer{
@@ -16,7 +16,7 @@ export class Footer{
     license: string = license;
     currentLanguage: string; 
     
-    private cookieService = inject(SsrCookieService)
+    private languageService = inject(LanguageService);
     
     languages = [
         { code: 'es', name: 'Español' },
@@ -27,13 +27,11 @@ export class Footer{
     private translate = inject(TranslateService)
     
     constructor(){
-        this.currentLanguage = this.translate.getCurrentLang();
+        this.currentLanguage = this.languageService.getRequestLanguage();
     }
     
     switchLanguage(languageCode: string): void {
-        this.currentLanguage = languageCode;
-        this.cookieService.set('language', languageCode);
-        this.translate.use(languageCode);
+        this.currentLanguage = this.languageService.applyLanguage(languageCode);
         setTimeout(location.reload.bind(location), 100);
     }
 

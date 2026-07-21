@@ -9,7 +9,7 @@
       }
       <div id="profile-text">
         @for (t of profile.texts; track t) {
-          <p>{{ t.content }}</p>
+          <p [innerHTML]="t.content"></p>
         }
       </div>
     </div>
